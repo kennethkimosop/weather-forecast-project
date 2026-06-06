@@ -93,5 +93,3 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
   </div>
 </div>
 
-
-## 🗂️ Repository Structure
