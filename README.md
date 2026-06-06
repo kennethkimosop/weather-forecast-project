@@ -75,6 +75,24 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
 2. **Feature Importance** (from LightGBM).
 3. **Model Comparison Table** + Confusion Matrix / ROC Curve.
 
+### Visualizations
+
+<div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+  <div style="text-align: center;">
+    <strong>EDA - Rainfall Distribution</strong><br>
+    <img src="images/eda_rainfall.png" width="300" alt="Rainfall Distribution">
+  </div>
+
+  <div style="text-align: center;">
+    <strong>Model Comparison</strong><br>
+    <img src="images/model_comparison.png" width="300" alt="Model Comparison">
+  </div>
+  <div style="text-align: center;">
+    <strong>Confusion Matrix</strong><br>
+    <img src="images/confusion_matrix.png" width="300" alt="Confusion Matrix">
+  </div>
+</div>
+
 ![EDA - Rainfall Distribution](images/eda_rainfall.png)
 ![Model Comparison](images/model_comparison.png)
 ![Confusion Matrix](images/confusion_matrix.png)
