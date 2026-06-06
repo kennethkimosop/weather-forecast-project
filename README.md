@@ -1,9 +1,7 @@
 # Data-Driven Irrigation Prediction for Smart Farming
 
-**ETI 4210: Machine Learning - Final Group Project**  
+**Machine Learning - Final Group Project**  
 **Predicting Monthly Irrigation Needs Using Historical Weather Data**
-
-![Project Banner](https://via.placeholder.com/800x300?text=Data-Driven+Irrigation+Prediction) <!-- Replace with actual banner if you create one -->
 
 ## 📋 Project Overview
 
@@ -14,6 +12,7 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
 **Key Goal**: Help farmers make proactive decisions on water usage, reduce crop stress, and optimize limited resources.
 
 ### 🎯 Objectives
+
 - Perform thorough data cleaning and EDA on time-series weather data.
 - Engineer relevant time-series features (lags, rolling statistics, seasonal indicators).
 - Build and compare multiple models for binary classification (`Irrigation_Needed`).
@@ -22,13 +21,13 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
 
 ## 📊 Dataset
 
-
-- **Source**: ICRISAT 40-year daily weather data (India)  
-- **Time Span**: ~14,600 daily records → aggregated to ~480–500 monthly records  
+- **Source**: ICRISAT 40-year daily weather data (India)
+- **Time Span**: ~14,600 daily records → aggregated to ~480–500 monthly records
 - **Key Variables**: Max/Min Temperature, Humidity, Wind Speed, Rainfall, Radiation, Evapotranspiration (ET0), Sunshine, etc.
 - **Target**: Binary `Irrigation_Needed` (0 = No, 1 = Yes) based on Net Water Demand (`ET0 - Rainfall`).
 
 **Challenges Addressed**:
+
 - Highly skewed rainfall distribution (many dry days, rare heavy events).
 - Small sample size after monthly aggregation (limits deep learning performance).
 - Time-series nature (prevented data leakage via TimeSeriesSplit).
@@ -36,24 +35,28 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
 ## 🛠️ Methodology
 
 ### 1. Data Preparation & EDA
+
 - Handled missing values (forward/backward fill + mean imputation).
 - Outlier capping.
 - Visualized distributions, correlations, skewness, and seasonal patterns.
 - Aggregated daily data to monthly level.
 
 ### 2. Feature Engineering
+
 - **Lag features** (1–12 months).
 - **Rolling statistics** (3, 7, 30-day windows for mean/sum).
 - **Derived features**: Net Water Demand, Temperature Range, Seasonal encodings (sin/cos).
 - Time-based features for seasonality.
 
 ### 3. Modeling
+
 - **Classical ML**: Logistic Regression (baseline), Random Forest, **LightGBM** (best performer), XGBoost.
 - **Deep Learning**: LSTM with sequence input.
 - **Validation**: TimeSeriesSplit + train/validation/test split to respect temporal order.
 - **Hyperparameter Tuning**: RandomizedSearchCV.
 
 ### 4. Evaluation
+
 - Primary metrics: **F1-score**, **ROC-AUC**, Recall (Class 1), Precision.
 - Confusion matrices, ROC curves.
 - Comparison of training vs validation behavior to detect overfitting.
@@ -72,10 +75,8 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
 2. **Feature Importance** (from LightGBM).
 3. **Model Comparison Table** + Confusion Matrix / ROC Curve.
 
-*(Place your actual screenshots in a folder like `/images/` or `/screenshots/` and update the paths below)*
-
-![EDA - Rainfall Distribution](screenshots/eda_rainfall.png)
-![Model Comparison](screenshots/model_comparison.png)
-![Confusion Matrix](screenshots/confusion_matrix.png)
+![EDA - Rainfall Distribution](images/eda_rainfall.png)
+![Model Comparison](images/model_comparison.png)
+![Confusion Matrix](images/confusion_matrix.png)
 
 ## 🗂️ Repository Structure
