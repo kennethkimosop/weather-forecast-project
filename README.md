@@ -1,21 +1,81 @@
-# Weather Forecasting ML Project
+# Data-Driven Irrigation Prediction for Smart Farming
 
-This repository contains a machine learning project for predicting rainfall using weather data (e.g., Nairobi dataset). Built in Google Colab.
+**ETI 4210: Machine Learning - Final Group Project**  
+**Predicting Monthly Irrigation Needs Using Historical Weather Data**
 
-## Overview
-- **Domain**: Weather/Climate
-- **Models**: Linear Regression, Random Forest, XGBoost, LSTM
-- **Dataset**: From Kaggle (Nairobi weather data)
-- **Features**: Lags, rolling averages, seasonal indicators
+![Project Banner](https://via.placeholder.com/800x300?text=Data-Driven+Irrigation+Prediction) <!-- Replace with actual banner if you create one -->
 
-## How to Run
-1. Open the notebook in Colab: [<image-card alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg" ></image-card>](https://colab.research.google.com/github.com/kennethkimosop/weather-forecast-project/blob/main/Forecast.ipynb)
-2. Run the cells sequentially.
+## 📋 Project Overview
 
-## Requirements
-- Python libraries: pandas, numpy, scikit-learn, tensorflow, etc.
+This project develops a machine learning solution to predict whether irrigation will be needed in the **next month** based on historical weather patterns. It addresses water management challenges in semi-arid regions, relevant to Kenyan agriculture (ASAL areas).
 
-## Results
-- Best model: [e.g., Random Forest] with RMSE X.XX
+We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to its completeness and similarity to Kenyan climatic conditions. The solution combines **Exploratory Data Analysis (EDA)**, **feature engineering**, **classical ML models**, and a **deep learning (LSTM)** baseline.
 
-For more details, see the notebook.
+**Key Goal**: Help farmers make proactive decisions on water usage, reduce crop stress, and optimize limited resources.
+
+### 🎯 Objectives
+- Perform thorough data cleaning and EDA on time-series weather data.
+- Engineer relevant time-series features (lags, rolling statistics, seasonal indicators).
+- Build and compare multiple models for binary classification (`Irrigation_Needed`).
+- Evaluate using classification metrics suitable for imbalanced data (F1-score, ROC-AUC, Recall).
+- Discuss real-world applicability and limitations.
+
+## 📊 Dataset
+
+
+- **Source**: ICRISAT 40-year daily weather data (India)  
+- **Time Span**: ~14,600 daily records → aggregated to ~480–500 monthly records  
+- **Key Variables**: Max/Min Temperature, Humidity, Wind Speed, Rainfall, Radiation, Evapotranspiration (ET0), Sunshine, etc.
+- **Target**: Binary `Irrigation_Needed` (0 = No, 1 = Yes) based on Net Water Demand (`ET0 - Rainfall`).
+
+**Challenges Addressed**:
+- Highly skewed rainfall distribution (many dry days, rare heavy events).
+- Small sample size after monthly aggregation (limits deep learning performance).
+- Time-series nature (prevented data leakage via TimeSeriesSplit).
+
+## 🛠️ Methodology
+
+### 1. Data Preparation & EDA
+- Handled missing values (forward/backward fill + mean imputation).
+- Outlier capping.
+- Visualized distributions, correlations, skewness, and seasonal patterns.
+- Aggregated daily data to monthly level.
+
+### 2. Feature Engineering
+- **Lag features** (1–12 months).
+- **Rolling statistics** (3, 7, 30-day windows for mean/sum).
+- **Derived features**: Net Water Demand, Temperature Range, Seasonal encodings (sin/cos).
+- Time-based features for seasonality.
+
+### 3. Modeling
+- **Classical ML**: Logistic Regression (baseline), Random Forest, **LightGBM** (best performer), XGBoost.
+- **Deep Learning**: LSTM with sequence input.
+- **Validation**: TimeSeriesSplit + train/validation/test split to respect temporal order.
+- **Hyperparameter Tuning**: RandomizedSearchCV.
+
+### 4. Evaluation
+- Primary metrics: **F1-score**, **ROC-AUC**, Recall (Class 1), Precision.
+- Confusion matrices, ROC curves.
+- Comparison of training vs validation behavior to detect overfitting.
+
+**Best Model**: **LightGBM** — excellent balance of performance, speed, and generalization on this tabular time-series dataset.
+
+## 📈 Results
+
+- LightGBM achieved strong F1-score and ROC-AUC on the test set.
+- Tree-based ensembles outperformed LSTM (expected due to limited data size).
+- Model captures seasonal patterns well but struggles with rare extreme events (typical for skewed rainfall data).
+
+**Screenshots** (add these to your repo):
+
+1. **EDA** – Rainfall distribution / correlation heatmap.
+2. **Feature Importance** (from LightGBM).
+3. **Model Comparison Table** + Confusion Matrix / ROC Curve.
+
+*(Place your actual screenshots in a folder like `/images/` or `/screenshots/` and update the paths below)*
+
+![EDA - Rainfall Distribution](screenshots/eda_rainfall.png)
+![Model Comparison](screenshots/model_comparison.png)
+![Confusion Matrix](screenshots/confusion_matrix.png)
+
+## 🗂️ Repository Structure
