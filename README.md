@@ -93,8 +93,5 @@ We used a **40-year daily weather dataset** (ICRISAT, India) as a proxy due to i
   </div>
 </div>
 
-![EDA - Rainfall Distribution](images/eda_rainfall.png)
-![Model Comparison](images/model_comparison.png)
-![Confusion Matrix](images/confusion_matrix.png)
 
 ## 🗂️ Repository Structure
